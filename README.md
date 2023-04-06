@@ -9,11 +9,16 @@ The goal of the language is that is is going to be very simple
 > —Michael Korda
 
 
-BARE MINIMUM
+minimum
 - [ ] integers
 - [ ] binary operations (+ - * /)
 - [ ] functions 
 
-EXTENDED
+extended
+- [ ] booleans and boolean operations
 - [ ] if statements
 - [ ] for loops
+- [ ] strings
+
+side goals
+- [ ] read runes instead of bytes
