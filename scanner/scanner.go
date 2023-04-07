@@ -40,6 +40,8 @@ func (s *Scanner) Next() (token.Token, string /* literal */) {
 		tok = token.ASSIGN
 	case ',':
 		tok = token.COMMA
+	case ';':
+		tok = token.SEMICOLON
 
 	case '(':
 		tok = token.LPAREN

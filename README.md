@@ -21,4 +21,5 @@ extended
 - [ ] strings
 
 side goals
+- [ ] optional semicolon
 - [ ] read runes instead of bytes

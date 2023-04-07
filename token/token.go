@@ -21,6 +21,7 @@ const (
 
 	ASSIGN
 	COMMA
+	SEMICOLON
 
 	FN
 	RETURN
@@ -44,8 +45,9 @@ var tokens = [...]string{
 	RPAREN: ")",
 	RBRACE: "}",
 
-	ASSIGN: "=",
-	COMMA:  ",",
+	ASSIGN:    "=",
+	COMMA:     ",",
+	SEMICOLON: ";",
 
 	FN:     "fn",
 	RETURN: "return",

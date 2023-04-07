@@ -56,9 +56,9 @@ func TestScanner__Next(t *testing.T) {
 		},
 		{
 			name:   "scans_semicolon_comma_and_assign",
-			source: ",=",
+			source: ",=;",
 			expected: []tokenLitPair{
-				{token.COMMA, ","}, {token.ASSIGN, "="}, {token.EOF, ""},
+				{token.COMMA, ","}, {token.ASSIGN, "="}, {token.SEMICOLON, ";"}, {token.EOF, ""},
 			},
 		},
 		{
@@ -94,6 +94,7 @@ func TestScanner__Next(t *testing.T) {
 				{token.LBRACE, "{"},
 				{token.RETURN, "return"},
 				{token.INT, "1"},
+				{token.SEMICOLON, ";"},
 				{token.RBRACE, "}"},
 				{token.EOF, ""},
 			},
