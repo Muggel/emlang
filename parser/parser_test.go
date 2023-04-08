@@ -36,10 +36,14 @@ func TestParser_parseIdentifier(t *testing.T) {
 }
 
 func TestParser_parseCallExpression(t *testing.T) {
-	s := scanner.NewScanner("func()")
+	s := scanner.NewScanner("foo()")
 	p := NewParser(s)
 	res := p.parseCallExpression()
-	expected := &ast.CallExpression{Token: token.IDENT, Function: &ast.Identifier{Token: token.IDENT, Literal: "func", Value: "func"}}
+	expected := &ast.CallExpression{
+		Token:    token.IDENT,
+		Literal:  "foo",
+		Function: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
+	}
 	assert.Equal(t, expected, res)
 }
 
@@ -48,7 +52,11 @@ func TestParser_parseReturnStatement(t *testing.T) {
 		s := scanner.NewScanner("return 123;")
 		p := NewParser(s)
 		res := p.parseReturnStatement()
-		expected := &ast.ReturnStatement{Token: token.RETURN, ReturnValue: &ast.IntLiteral{Token: token.INT, Literal: "123", Value: 123}}
+		expected := &ast.ReturnStatement{
+			Token:       token.RETURN,
+			Literal:     "return",
+			ReturnValue: &ast.IntLiteral{Token: token.INT, Literal: "123", Value: 123},
+		}
 		assert.Equal(t, expected, res)
 	})
 
@@ -67,6 +75,7 @@ func TestParser_parseAssignmentStatement(t *testing.T) {
 		res := p.parseAssignmentStatement()
 		expected := &ast.AssignmentStatement{
 			Token:      token.ASSIGN,
+			Literal:    "=",
 			Identifier: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
 			Value:      &ast.IntLiteral{Token: token.INT, Literal: "123", Value: 123},
 		}
@@ -95,15 +104,18 @@ func TestParser_parseBlockStatement(t *testing.T) {
 		p := NewParser(s)
 		res := p.parseBlockStatement()
 		expected := &ast.BlockStatement{
-			Token: token.LBRACE,
+			Token:   token.LBRACE,
+			Literal: "{",
 			Statements: []ast.Statement{
 				&ast.AssignmentStatement{
 					Token:      token.ASSIGN,
+					Literal:    "=",
 					Identifier: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
 					Value:      &ast.IntLiteral{Token: token.INT, Literal: "123", Value: 123},
 				},
 				&ast.ReturnStatement{
 					Token:       token.RETURN,
+					Literal:     "return",
 					ReturnValue: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
 				},
 			},
@@ -131,10 +143,12 @@ func TestParser_parseFunctionDeclaration(t *testing.T) {
 			Identifier: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
 			ReturnType: &ast.Identifier{Token: token.IDENT, Literal: "int", Value: "int"},
 			Body: &ast.BlockStatement{
-				Token: token.LBRACE,
+				Token:   token.LBRACE,
+				Literal: "{",
 				Statements: []ast.Statement{
 					&ast.ReturnStatement{
 						Token:       token.RETURN,
+						Literal:     "return",
 						ReturnValue: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
 					},
 				},
@@ -153,7 +167,8 @@ func TestParser_parseFunctionDeclaration(t *testing.T) {
 			Identifier: &ast.Identifier{Token: token.IDENT, Literal: "foo", Value: "foo"},
 			ReturnType: &ast.Identifier{Token: token.IDENT, Literal: "void", Value: "void"},
 			Body: &ast.BlockStatement{
-				Token: token.LBRACE,
+				Token:   token.LBRACE,
+				Literal: "{",
 				Statements: []ast.Statement{
 					&ast.AssignmentStatement{
 						Token:      token.ASSIGN,
