@@ -16,7 +16,6 @@ type Parser struct {
 	currentLiteral string
 	peekToken      token.Token
 	peekLiteral    string
-	hasPeeked      bool
 
 	Errors []error
 }
