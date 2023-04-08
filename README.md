@@ -23,3 +23,6 @@ extended
 side goals
 - [ ] optional semicolon
 - [ ] read runes instead of bytes
+
+Ultimate
+- [ ] write a compiler for the language

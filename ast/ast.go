@@ -152,9 +152,26 @@ func (i *Identifier) String() string       { return i.Value }
 type IntLiteral struct {
 	Token   token.Token
 	Literal string
-	Value   int
+	Value   int64
 }
 
 func (il *IntLiteral) expression()          {}
 func (il *IntLiteral) TokenLiteral() string { return il.Literal }
 func (il *IntLiteral) String() string       { return il.Literal }
+
+type CallExpression struct {
+	Token    token.Token
+	Literal  string
+	Function *Identifier
+}
+
+func (ce *CallExpression) expression()          {}
+func (ce *CallExpression) TokenLiteral() string { return ce.Literal }
+func (ce *CallExpression) String() string {
+	var res strings.Builder
+
+	res.WriteString(ce.Function.String())
+	res.WriteString("()")
+
+	return res.String()
+}
